@@ -12,11 +12,17 @@ import React from "react";
 import GeoChart from "../Charts/GeoChart";
 import PieChart from "../Charts/PieChart";
 import TradingViewChart from "../Charts/TradingViewChart";
+import { NavLink } from "react-router-dom";
 
 function Analytics() {
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{fontSize:"20px" , textDecoration:'none' ,  fontStyle: "none" }}>
+      <NavLink style={{ textDecoration:"none" }} to={'/'}>
+       <Typography sx={{fontSize:"20px" , textDecoration:'none' ,  fontStyle: "none" }}>go back</Typography>
+      </NavLink>
+    </Box>
         <Box sx={{ display: "flex", gap: 3 }}>
           <Box sx={{ width: "100%" }}>
             <Grid container spacing={1} sx={{ width: "100%" }}>

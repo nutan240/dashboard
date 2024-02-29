@@ -7,6 +7,7 @@ import Home from '../pages/Home';
 import Settings from '../pages/Settings';
 import Analytics from '../pages/Analytics';
 import Tradingchart from '../pages/Tradingchart';
+import Products from '../pages/Products';
 function MainApp() {
   return (
     <>
@@ -19,6 +20,7 @@ function MainApp() {
      <Route path="/about" element={<About/>} />
      <Route path="/analytics" element={<Analytics/>} />
      <Route path="/trading" element={<Tradingchart/>} />
+     <Route path="/product" element={<Products/>} />
      </Routes>
      </Router>
         

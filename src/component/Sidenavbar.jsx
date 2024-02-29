@@ -231,6 +231,27 @@ const home =()=>{
                 <ListItemText sx={{width:'100px' ,}} onClick={()=>navigate('/trading')}primary='TRADING CHART' />
               </ListItemButton>
             </ListItem>
+            <ListItem disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: 'center',
+                  pl: 3.7,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: 4,
+                    justifyContent: 'center',
+                  }}
+                >
+                    <HomeIcon />
+                </ListItemIcon>
+                <ListItemText sx={{width:'100px' ,}} onClick={()=>navigate('/product')}primary='PRODUCTS' />
+              </ListItemButton>
+            </ListItem>
+
         </List>
         <Divider />
        
