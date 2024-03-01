@@ -19,6 +19,7 @@ import { db } from "../firebase/Firebase";
 
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import Swal from "sweetalert2";
+import { cleanDigitSectionValue } from "@mui/x-date-pickers/internals/hooks/useField/useField.utils";
 
 const currencies = [
   {
@@ -34,36 +35,35 @@ const currencies = [
     label: "ELECTRONIC",
   },
 ];
-function EditProduct({ closeEvent ,fid }) {
+function EditProduct({ closeEvent, fid }) {
   const formik = useFormikContext();
 
+  console.log(fid, "fidfidfid");
 
-  
   const handleSubmit = async (values, { resetForm }) => {
+    console.log(values, "values");
     try {
       const docRef = doc(db, "products", fid.id);
-      
-      // Ensure that the date field is not undefined before updating the document
       const documentData = {
         name: values.name,
         price: values.price,
         category: values.category,
+        date: values.date,
+
+        // name: fid.name || values.name,
+        // price: fid.price || values.price,
+        // date: fid.date ||  values.date ,
+        // category: fid.category ||  values.category,
       };
-  
-      // Add the date field only if it's defined
-      if (values.date) {
-        documentData.date = values.date;
-      }
-  
+
       await setDoc(docRef, documentData);
-      
+
       Swal.fire("Updated!", "Your product has been updated.", "success");
       closeEvent();
     } catch (error) {
       console.error("Error updating product: ", error);
     }
   };
-  
 
   return (
     <Formik
@@ -120,6 +120,7 @@ function EditProduct({ closeEvent ,fid }) {
                 <Field
                   as={TextField}
                   name="date"
+                  value={fid.date && values.date}
                   label="Date"
                   variant="outlined"
                 />
@@ -134,7 +135,7 @@ function EditProduct({ closeEvent ,fid }) {
                     labelId="category-label"
                     id="category"
                     name="category"
-                    value={ fid.category && values.category }
+                    value={fid.category}
                     onChange={handleChange}
                     label="Category"
                   >
@@ -148,7 +149,7 @@ function EditProduct({ closeEvent ,fid }) {
               </Grid>
             </Grid>
             <Button type="submit" variant="contained">
-            update
+              update
             </Button>
           </Box>
         </Form>

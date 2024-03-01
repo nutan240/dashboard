@@ -252,6 +252,27 @@ const home =()=>{
               </ListItemButton>
             </ListItem>
 
+            <ListItem disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: 'center',
+                  pl: 3.7,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: 4,
+                    justifyContent: 'center',
+                  }}
+                >
+                    <HomeIcon />
+                </ListItemIcon>
+                <ListItemText sx={{width:'100px' ,}} onClick={()=>navigate('/demo')}primary='DATE PICKER' />
+              </ListItemButton>
+            </ListItem>
+
         </List>
         <Divider />
        

@@ -9,6 +9,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import {
   Autocomplete,
   Box,
@@ -105,19 +106,26 @@ export default function Products() {
 
   const filterData = (v) => {
     if (v) {
-      setRows([v]);
+      const filtered = rows.filter((row) => (
+        row.category === 'LAPTOP' ||
+        row.category === 'ELECTRONIC' ||
+        row.category === 'MOBILE'
+      ));
+      setFilteredRows(filtered);
     } else {
-      getUsers();
+      setFilteredRows([]);
     }
   };
 
-  const editData = (id, name, price, category) => {
+  const editData = (id, name, price, category, date) => {
     const data = {
       id: id,
       name: name,
       price: price,
       category: category,
+      date: date,
     };
+    console.log(data, "data");
     setFormid(data);
     handleEditOpen(true);
   };
@@ -156,16 +164,46 @@ export default function Products() {
         </Modal>
       </div>
 
+      <Typography
+        gutterBottom
+        variant="h5"
+        component="div"
+        sx={{
+          padding: "20px",
+          fontSize: "40px",
+          textAlign: "center",
+          fontStyle: "italic",
+          color: "darkblue",
+          fontWeight: "bold",
+        }}
+      >
+        Products List
+      </Typography>
+      <Divider />
+      <Box height={10} />
+      <Stack direction="row" spacing={2} className="my-2 mb-2">
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{ flexGrow: 1 }}
+        ></Typography>
+        <Button
+          sx={{
+            background: "white",
+            borderRadius: "20px",
+            height: "55px",
+            width: "47px",
+          }}
+          onClick={handleOpen}
+          variant="contained"
+        >
+          <AddCircleIcon
+            sx={{ height: "50px", width: "40px", color: "green" }}
+          />
+        </Button>
+      </Stack>
       {rows.length > 0 && (
         <Paper sx={{ width: "98%", overflow: "hidden", padding: "12px" }}>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
-            sx={{ padding: "20px" }}
-          >
-            Products List
-          </Typography>
           <Divider />
           <Box height={10} />
           <Stack direction="row" spacing={2} className="my-2 mb-2">
@@ -175,23 +213,11 @@ export default function Products() {
               options={rows}
               sx={{ width: 300 }}
               onChange={(e, v) => filterData(v)}
-              getOptionLabel={(rows) => rows.price || ""}
+              getOptionLabel={(rows) => rows.category || ""}
               renderInput={(params) => (
                 <TextField {...params} size="small" label="Search Products" />
               )}
             />
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{ flexGrow: 1 }}
-            ></Typography>
-            <Button
-              onClick={handleOpen}
-              variant="contained"
-              endIcon={<AddCircleIcon />}
-            >
-              Add
-            </Button>
           </Stack>
           <Box height={10} />
           <TableContainer>
@@ -227,7 +253,9 @@ export default function Products() {
                         key={row.code}
                       >
                         <TableCell align="left">{row.name}</TableCell>
-                        <TableCell align="left">{row.price}</TableCell>
+                        <TableCell align="left">  
+                        <CurrencyRupeeIcon sx={{fontSize:'13px'}} />
+                     {row.price}</TableCell>
                         <TableCell align="left">{row.category}</TableCell>
                         <TableCell align="left">{row.date}</TableCell>
                         <TableCell align="left">
@@ -244,8 +272,8 @@ export default function Products() {
                                   row.id,
                                   row.name,
                                   row.price,
-                                  row.date,
-                                  row.category
+                                  row.category,
+                                  row.date
                                 )
                               }
                             />
