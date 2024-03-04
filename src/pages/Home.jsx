@@ -5,9 +5,9 @@ import { Box, Typography } from '@mui/material'
 function Home() {
   return (
    <>
-   <Box sx={{ display: 'flex' , background:'rgb(96 34 99 / 16%)' , height :'100vh' }}>
+   <Box sx={{ display: 'flex' , background:'rgb(96 34 99 / 16%)' , height :'100vh' ,  }}>
   <Sidenavbar/>
-  <Box component="main" sx={{ flexGrow: 1, p: 3 , marginTop :10}}>
+  <Box component="main" sx={{ flexGrow: 1, p: 3 , marginTop :10 ,width:'80%'}}>
      <Typography sx={{fontStyle:'italic' ,fontWeight:'bold' ,fontSize:'30px', color:'rgb(96 34 99)'}}>HOME</Typography>
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

@@ -7,7 +7,7 @@ function Tradingchart() {
   return (
     <>
     <Box sx={{fontSize:"20px" , m:5}}>
-      <NavLink to={'/'}>
+      <NavLink to={'/home'}>
         go back
       </NavLink>
     </Box>

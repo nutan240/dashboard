@@ -19,14 +19,15 @@ function Settings() {
   return (
     <Box
       sx={{
-        display: "flex",
+        display: 'flex' ,
         background: "rgb(169 154 159 / 45%)",
         height: "100vh",
         overflow: "auto",
+        // width:'100%'
       }}
     >
       <Sidenavbar />
-      <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: 10 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: 10 ,  }}>
         <Typography
           sx={{
             fontStyle: "italic",

@@ -5,7 +5,7 @@ function About() {
   return (
     <Box sx={{ display: 'flex' ,background:'rgb(127 154 205 / 35%)' ,height :'100vh' , overflow:'auto' }}>
     <Sidenavbar/>
-    <Box component="main" sx={{ flexGrow: 1, p: 3 , marginTop :10}}>
+    <Box component="main" sx={{ flexGrow: 1, p: 3 , marginTop :10 , width:'80%'}}>
        <Typography sx={{fontStyle:'italic' ,fontWeight:'bold' ,fontSize:'30px', color:'rgb(96 34 99)'}}>ABOUT</Typography>
           <Typography paragraph>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

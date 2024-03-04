@@ -19,7 +19,7 @@ function Analytics() {
     <>
       <Box sx={{ flexGrow: 1 }}>
       <Box sx={{fontSize:"20px" , textDecoration:'none' ,  fontStyle: "none" }}>
-      <NavLink style={{ textDecoration:"none" }} to={'/'}>
+      <NavLink style={{ textDecoration:"none" }} to={'/home'}>
        <Typography sx={{fontSize:"20px" , textDecoration:'none' ,  fontStyle: "none" }}>go back</Typography>
       </NavLink>
     </Box>

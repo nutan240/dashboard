@@ -50,10 +50,6 @@ function EditProduct({ closeEvent, fid }) {
         category: values.category,
         date: values.date,
 
-        // name: fid.name || values.name,
-        // price: fid.price || values.price,
-        // date: fid.date ||  values.date ,
-        // category: fid.category ||  values.category,
       };
 
       await setDoc(docRef, documentData);

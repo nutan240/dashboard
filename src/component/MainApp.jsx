@@ -9,6 +9,9 @@ import Analytics from '../pages/Analytics';
 import Tradingchart from '../pages/Tradingchart';
 import Products from '../pages/Products';
 import Demo from '../pages/Demo';
+import Logiin from './Login';
+import Signup from './Signup';
+import Phonelogin from './Phonelogin';
 function MainApp() {
   return (
     <>
@@ -16,7 +19,11 @@ function MainApp() {
      <Routes>
 
     
-     <Route path="/" element={<Home/>} />
+     <Route path="/" element={<Logiin/>} />
+     <Route path="/signup" element={<Signup/>} />
+     <Route path="/phone" element={<Phonelogin/>} />
+
+     <Route path="/home" element={<Home/>} />
      <Route path="/setting" element={<Settings/>} />
      <Route path="/about" element={<About/>} />
      <Route path="/analytics" element={<Analytics/>} />

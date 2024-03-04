@@ -138,7 +138,7 @@ export default function Products() {
   return (
     <>
       <Box sx={{ fontSize: "20px", textDecoration: "none" }}>
-        <NavLink style={{ textDecoration: "none" }} to={"/"}>
+        <NavLink style={{ textDecoration: "none" }} to={"/home"}>
           Go back
         </NavLink>
       </Box>
