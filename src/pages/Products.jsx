@@ -56,7 +56,7 @@ export default function Products() {
   const [open, setOpen] = useState(false);
   const [editopen, setEditopen] = useState(false);
   const handleOpen = () => setOpen(true);
-
+  const [filteredRows, setFilteredRows] = useState([]);
   const handleClose = () => setOpen(false);
   const handleEditClose = () => setEditopen(false);
   const handleEditOpen = () => setEditopen(true);
@@ -106,16 +106,13 @@ export default function Products() {
 
   const filterData = (v) => {
     if (v) {
-      const filtered = rows.filter((row) => (
-        row.category === 'LAPTOP' ||
-        row.category === 'ELECTRONIC' ||
-        row.category === 'MOBILE'
-      ));
+      const filtered = rows.filter((row) => row.category === v);
       setFilteredRows(filtered);
     } else {
       setFilteredRows([]);
     }
   };
+  
 
   const editData = (id, name, price, category, date) => {
     const data = {
@@ -137,6 +134,7 @@ export default function Products() {
 
   return (
     <>
+    <Box >
       <Box sx={{ fontSize: "20px", textDecoration: "none" }}>
         <NavLink style={{ textDecoration: "none" }} to={"/home"}>
           Go back
@@ -181,7 +179,7 @@ export default function Products() {
       </Typography>
       <Divider />
       <Box height={10} />
-      <Stack direction="row" spacing={2} className="my-2 mb-2">
+      <Stack sx={{width:'90%' , margin:'auto'}} direction="row" spacing={2} className="my-2 mb-2">
         <Typography
           variant="h6"
           component="div"
@@ -203,41 +201,38 @@ export default function Products() {
         </Button>
       </Stack>
       {rows.length > 0 && (
-        <Paper sx={{ width: "98%", overflow: "hidden", padding: "12px" }}>
+        <Paper sx={{ width: "89%", overflow: "hidden", padding: "12px" , margin:'auto' , boxShadow:10 }}>
           <Divider />
           <Box height={10} />
           <Stack direction="row" spacing={2} className="my-2 mb-2">
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={rows}
-              sx={{ width: 300 }}
-              onChange={(e, v) => filterData(v)}
-              getOptionLabel={(rows) => rows.category || ""}
-              renderInput={(params) => (
-                <TextField {...params} size="small" label="Search Products" />
-              )}
-            />
           </Stack>
           <Box height={10} />
           <TableContainer>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  <TableCell align="left" style={{ minWidth: "100px" }}>
-                    Name
+                  <TableCell align="left" style={{ minWidth: "100px" , color:'darkgreen' , fontWeight:'bold' , fontSize:'18px' , fontStyle:'italic' , textDecoration:'underline'}}>
+                    NAME
                   </TableCell>
-                  <TableCell align="left" style={{ minWidth: "100px" }}>
-                    Price
+                  <TableCell align="left" style={{ minWidth: "100px"
+                  , color:'darkgreen' , fontWeight:'bold' , fontSize:'18px' , fontStyle:'italic' , textDecoration:'underline' }}>
+                    PRICE
                   </TableCell>
-                  <TableCell align="left" style={{ minWidth: "100px" }}>
-                    Category
+                  <TableCell align="left" style={{ minWidth: "100px"
+                  , color:'darkgreen' , fontWeight:'bold' , fontSize:'18px' , fontStyle:'italic' , textDecoration:'underline'
+                   }}>
+                   
+                    CATEGORY
                   </TableCell>
-                  <TableCell align="left" style={{ minWidth: "100px" }}>
-                    Date
+                  <TableCell align="left" style={{ minWidth: "100px" 
+                  , color:'darkgreen' , fontWeight:'bold' , fontSize:'18px' , fontStyle:'italic' ,textDecoration:'underline'
+                  }}>
+                    DATE
                   </TableCell>
-                  <TableCell align="left" style={{ minWidth: "100px" }}>
-                    Action
+                  <TableCell align="left" style={{ minWidth: "100px" 
+                  , color:'darkgreen' , fontWeight:'bold' , fontSize:'18px' , fontStyle:'italic', textDecoration:'underline'
+                  }}>
+                    ACTION
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -306,6 +301,7 @@ export default function Products() {
           />
         </Paper>
       )}
+      </Box>
     </>
   );
 }

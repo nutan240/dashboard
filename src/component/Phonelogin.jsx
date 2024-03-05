@@ -90,9 +90,10 @@ function Phonelogin() {
               Send otp
             </Button>
             <TextField
+
               sx={{ marginTop: "20px" }}
               onChange={(e) => setOtp(e.target.value)}
-              variant="outlined"
+             variant="filled"
               size="full"
               label="Enter Otp"
             />
@@ -117,7 +118,7 @@ function Phonelogin() {
                   textDecoration: "none",
                   fontSize: "20px",
                 }}
-                to={"/"}
+                to={"/signup"}
                 variant="body2"
               >
                 have a account Sign in with gmail{" "}

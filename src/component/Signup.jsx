@@ -13,6 +13,7 @@ import Inputcomp from "./Inputcomp";
 
 import { makeStyles } from "mui-styles-hook";
 import CustomButton from "./CustomButton";
+import { FcGoogle, FcPhone } from "react-icons/fc";
 
 
 const useStyles = makeStyles(() => ({
@@ -117,13 +118,28 @@ function Signup() {
     },
   });
 
+  const handelgoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        setValue(user.email);
+        localStorage.setItem("email", user.email);
+        navigate("/home");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   return (
     <>
       <Stack>
         <Grid sx={classes.grid_container}>
           <Grid sx={classes.grid_container1}>
             <Stack direction={"column"} sx={classes.form_container11}>
-              <Typography className="heading" variant="h5">
+              <Typography sx={{ fontWeight: "bold",
+    paddingBottom: "15px",
+    color: "rgb(37, 84, 112)", fontStyle:'italic'}} className="heading" variant="h5">
                 Sign Up
               </Typography>
 
@@ -221,6 +237,45 @@ function Signup() {
                   </Stack>
                 </Form>
               </Formik>
+
+              <Box
+                  sx={{
+                    marginTop: "15px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Typography
+                    onClick={() => {
+                      navigate("/phone");
+                    }}
+                    sx={{
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "flex-end",
+                    }}
+                  >
+                    {" "}
+                    <FcPhone
+                      style={{ fontSize: "23px", paddingRight: "10px" }}
+                    />{" "}
+                    signin with Phone
+                  </Typography>
+                  <Typography
+                    onClick={handelgoogle}
+                    sx={{
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "flex-end",
+                    }}
+                  >
+                    {" "}
+                    <FcGoogle
+                      style={{ fontSize: "19px", paddingRight: "10px" }}
+                    />{" "}
+                    signin with google
+                  </Typography>
+                </Box>
               <Box sx={{ paddingTop: 3 }}>
                 <NavLink
                   style={{ color: "darkblue",

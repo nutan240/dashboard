@@ -17,8 +17,12 @@ function Inputcomp({
   };
 
   return (
+    <>
+
     <TextField
+    sx={{background:'white'}}
       fullWidth
+      variant="filled"
       label={label}
       type={type === "password" ? (showPassword ? "text" : "password") : type}
       name={inputname}
@@ -37,6 +41,7 @@ function Inputcomp({
           ) : null,
       }}
     />
+    </>
   );
 }
 

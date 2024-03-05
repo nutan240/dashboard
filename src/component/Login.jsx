@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Modal,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   RecaptchaVerifier,
@@ -20,20 +27,33 @@ import { makeStyles } from "mui-styles-hook";
 import { FcGoogle } from "react-icons/fc";
 import "react-phone-input-2/lib/style.css";
 import { FcPhone } from "react-icons/fc";
+import Forgetpassword from "../pages/Forgetpassword";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid white",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: "12px",
+  zIndex: 61,
+};
 
 const useStyles = makeStyles(() => ({
   container: {
     height: "100vh",
-    background: " #006369a3",
+    background: "linear-gradient(to bottom left, #006369a3 50%, #cae0ec 50%)",
     overflow: "auto",
-    width: "100%",
     padding: 3,
   },
   container2: {
     width: { lg: "70%", sm: "100%", xs: "100%" },
     margin: { lg: "auto", sm: "0px" },
     // height: { lg: "80vh", sm: "90%" },
-    display: "flex",
+    // display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -42,7 +62,7 @@ const useStyles = makeStyles(() => ({
     margin: "auto",
     boxShadow: 3,
     padding: 5,
-    height: "350px",
+    height: "420px",
     backgroundImage: ` url( ${Image1} )`,
     color: "white",
     borderTopLeftRadius: 6,
@@ -63,10 +83,11 @@ const useStyles = makeStyles(() => ({
     marginX: "auto",
     fontSize: "26px",
     display: { lg: "block", sm: "none" },
+    marginTop: "70px",
   },
   typography: {
-    fontSize: { lg: "35px", sm: "30px", sx: "0px" },
-    width: { lg: "70%", sm: "60%" },
+    fontSize: { lg: "48px", sm: "30px", sx: "0px" },
+    width: { lg: "80%", sm: "60%" },
   },
   stack_container: {
     width: { lg: "50%", md: "45%", sm: "40%", xs: "100%" },
@@ -76,10 +97,12 @@ const useStyles = makeStyles(() => ({
     background: "rgb(255 255 255)",
     borderTopRightRadius: 9,
     borderBottomRightRadius: 9,
+    height: "420px",
   },
   typography_para: {
     fontSize: "13px",
     fontStyle: "italic",
+    // height:'30px'
   },
   typography_head: {
     fontWeight: "bold",
@@ -93,19 +116,23 @@ function Logiin() {
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
   const [value, setValue] = useState("");
+  const [open, setOpen] = useState(false);
 
-  const handelgoogle = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = result.user;
-        setValue(user.email);
-        localStorage.setItem("email", user.email);
-        navigate("/home");
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
+  const handle_Open = () => setOpen(true);
+  const handle_Close = () => setOpen(false);
+
+  // const handelgoogle = () => {
+  //   signInWithPopup(auth, provider)
+  //     .then((result) => {
+  //       const user = result.user;
+  //       setValue(user.email);
+  //       localStorage.setItem("email", user.email);
+  //       navigate("/home");
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //     });
+  // };
 
   useEffect(() => {
     setValue(localStorage.getItem("email"));
@@ -146,15 +173,36 @@ function Logiin() {
         });
     },
   });
+
+  const Forgetpassword1 = () => {
+    handle_Open(true);
+  };
+
   return (
     <>
+      <Box sx={{ zIndex: "0px" }}>
+        <Modal
+          open={open}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Forgetpassword closeEvent={handle_Close} />
+          </Box>
+        </Modal>
+      </Box>
+
       <Stack sx={classes.container} direction={"row"}>
         <Stack direction={"row"} sx={classes.container2}>
           <Stack sx={classes.login_stack_container2}>
             <Box sx={classes.box_container}>
               <Typography sx={classes.typography}>JOIN OUR </Typography>
-              <Typography sx={{ fontSize: "26px" }}>COMMUNITY </Typography>
-              <Typography>keep Your Employee Data saperate</Typography>
+              <Typography sx={{ fontSize: "30px", marginTop: "18px" }}>
+                COMMUNITY{" "}
+              </Typography>
+              <Typography sx={{ marginTop: "15px" }}>
+                keep Your Employee Data saperate
+              </Typography>
             </Box>
           </Stack>
 
@@ -164,7 +212,7 @@ function Logiin() {
             </Typography>
             <form onSubmit={formik.handleSubmit}>
               <Stack
-                sx={{ width: "100%", fontSize: "19px" }}
+                sx={{ width: "100%", fontSize: "19px", marginTop: "10px" }}
                 direction={"column"}
                 spacing={1}
               >
@@ -206,67 +254,35 @@ function Logiin() {
                 </Typography>
                 <CustomButton buttontype={"submit"} title={"login"} />
 
-                <Box
-                  sx={{
-                    marginTop: "15px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Typography
-                    onClick={() => {
-                      navigate("/phone");
-                    }}
+                <Box sx={{ marginTop: "15px" }}>
+                  <Box
                     sx={{
-                      cursor: "pointer",
-                      display: "flex",
-                      alignItems: "flex-end",
+                      marginTop: "15px",
+                      color: "darkblue",
+                      fontSize: "18px",
+                      cursor:'pointer'
                     }}
+                    onClick={Forgetpassword1}
                   >
-                    {" "}
-                    <FcPhone
-                      style={{ fontSize: "23px", paddingRight: "10px" }}
-                    />{" "}
-                    signin with Phone
-                  </Typography>
-                  <Typography
-                    onClick={handelgoogle}
-                    sx={{
-                      cursor: "pointer",
-                      display: "flex",
-                      alignItems: "flex-end",
+                    Forgot password
+                  </Box>
+                </Box>
+                <Box sx={{ marginTop: "20px" }}>
+                  <NavLink
+                    style={{
+                      color: "darkblue",
+                      paddingTop: 6,
+                      textDecoration: "none",
+                      fontSize: "18px",
                     }}
+                    to={"/signup"}
+                    variant="body2"
                   >
-                    {" "}
-                    <FcGoogle
-                      style={{ fontSize: "19px", paddingRight: "10px" }}
-                    />{" "}
-                    signin with google
-                  </Typography>
+                    Don't have an account? Sign up
+                  </NavLink>
                 </Box>
               </Stack>
             </form>
-            <Box sx={{ marginTop: "15px" }}>
-              <Box
-                sx={{ marginTop: "15px", color: "darkblue", fontSize: "18px" }}
-              >
-                Forgot password
-              </Box>
-            </Box>
-            <Box sx={{ marginTop: "15px" }}>
-              <NavLink
-                style={{
-                  color: "darkblue",
-                  paddingTop: 3,
-                  textDecoration: "none",
-                  fontSize: "18px",
-                }}
-                to={"/signup"}
-                variant="body2"
-              >
-                Don't have an account? Sign up
-              </NavLink>
-            </Box>
           </Stack>
         </Stack>
       </Stack>
